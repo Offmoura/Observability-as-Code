@@ -1,0 +1,30 @@
+services:
+  grafana:
+    image: grafana/grafana:12.2.0-16979757807 # Nightly Build
+    ports:
+      - 3000:3000
+    environment:
+      - GF_FEATURE_TOGGLES_ENABLE=provisioning,kubernetesDashboards
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    entrypoint: /bin/sh
+    command: 
+      - -c
+      - |
+        cat > /etc/prometheus/prometheus.yml <<EOF
+        scrape_configs:
+          - job_name: node-exporter
+            static_configs:
+              - targets: ["node-exporter:9100"]
+        EOF
+        prometheus --config.file=/etc/prometheus/prometheus.yml
+  node-exporter:
+    image: prom/node-exporter
+    ports:
+      - 9100:9100
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    command: --path.procfs=/host/proc --path.sysfs=/host/sys
