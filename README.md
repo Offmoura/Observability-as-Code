@@ -8,7 +8,7 @@ Utilizando o versionamento de Dashboard com prometheus e grafana.
 
 - Criado o primeiro Dashboard sincronizado
 
-- Testa a sincronziação bidirecional
+- Testa a sincronização bidirecional
 
 Artigo do Devopscube
 
