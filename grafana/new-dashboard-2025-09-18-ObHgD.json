@@ -31,6 +31,7 @@
           "type": "prometheus",
           "uid": "feyhzdk93v4lce"
         },
+        "description": "Add System Health dashboard with memory usage gauge",
         "fieldConfig": {
           "defaults": {
             "color": {
